@@ -52,24 +52,12 @@ function App() {
                                     <td>Mark</td>
                                     <td>Otto</td>
                                     <td>@mdo</td>
-                                    <td>@mdo</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                    <td>@fat</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Larry the Bird</td>
-                                    <td>Larry the Bird</td>
-                                    <td>@twitter</td>
-                                    <td>@twitter</td>
-                                    <td>@twitter</td>
+                                    <td>
+                                        <Button variant="warning">編輯</Button>
+                                    </td>
+                                    <td>
+                                        <Button variant="danger">刪除</Button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </Table>
