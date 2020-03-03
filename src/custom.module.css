@@ -1,0 +1,12 @@
+.customNavBar {
+    background-color: #375a7f;
+}
+
+.customNavBarText {
+    color: rgba(255, 255, 255, 1);
+}
+
+.customAdd {
+    float: right;
+    background-color: #464545;
+}
