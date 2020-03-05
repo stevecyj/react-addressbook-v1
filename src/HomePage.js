@@ -50,7 +50,7 @@ function HomePage() {
         <div className="home-page">
             <Modal show={openAddModal} onHide={closeModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Add Contact</Modal.Title>
+                    <Modal.Title>新增聯絡人</Modal.Title>
                 </Modal.Header>
                 <Modal.Body></Modal.Body>
             </Modal>
@@ -60,8 +60,12 @@ function HomePage() {
                 </Modal.Header>
                 <Modal.Body></Modal.Body>
             </Modal>
-            <ButtonToolbar onClick={openModal} className="justify-content-end mb-2">
-                <Button variant="primary" style={{ backgroundColor: '#2c2c2c', borderColor: '#2c2c2c' }}>
+            <ButtonToolbar className="justify-content-end mb-2">
+                <Button
+                    onClick={openModal}
+                    variant="primary"
+                    style={{ backgroundColor: '#2c2c2c', borderColor: '#2c2c2c' }}
+                >
                     新增聯絡人
                 </Button>
             </ButtonToolbar>
