@@ -1,3 +1,6 @@
 .home-page {
-    padding: 20px;
+    /* padding: 20px; */
+}
+.table tbody tr td {
+    vertical-align: middle;
 }

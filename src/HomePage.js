@@ -48,6 +48,23 @@ function HomePage() {
     });
     return (
         <div className="home-page">
+            <Modal show={openAddModal} onHide={closeModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Add Contact</Modal.Title>
+                </Modal.Header>
+                <Modal.Body></Modal.Body>
+            </Modal>
+            <Modal show={openEditModal} onHide={closeModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit Contact</Modal.Title>
+                </Modal.Header>
+                <Modal.Body></Modal.Body>
+            </Modal>
+            <ButtonToolbar onClick={openModal} className="justify-content-end mb-2">
+                <Button variant="primary" style={{ backgroundColor: '#2c2c2c', borderColor: '#2c2c2c' }}>
+                    新增聯絡人
+                </Button>
+            </ButtonToolbar>
             <Table striped bordered hover variant="dark">
                 <thead>
                     <tr style={{ backgroundColor: '#3498db' }}>
@@ -67,13 +84,13 @@ function HomePage() {
                             <td>{c.email}</td>
                             <td>{c.address}</td>
                             <td>
-                                <Button variant="outline-primary" onClick={editContact.bind(this, c)}>
-                                    Edit
+                                <Button variant="warning" onClick={editContact.bind(this, c)}>
+                                    編輯
                                 </Button>
                             </td>
                             <td>
-                                <Button variant="outline-primary" onClick={deleteSelectedContact.bind(this, c.id)}>
-                                    Delete
+                                <Button variant="danger" onClick={deleteSelectedContact.bind(this, c.id)}>
+                                    刪除
                                 </Button>
                             </td>
                         </tr>

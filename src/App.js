@@ -26,17 +26,6 @@ function App() {
                     </Col>
                 </Row>
                 <Container fluid>
-                    <Row className="mb-2">
-                        <Col>
-                            <Button
-                                variant="primary"
-                                onClick={handleShow}
-                                style={{ backgroundColor: '#2c2c2c', borderColor: '#2c2c2c', float: 'right' }}
-                            >
-                                新增聯絡人
-                            </Button>
-                        </Col>
-                    </Row>
                     <Row>
                         <Col md={12}>
                             <Route path="/" exact component={HomePage} />
