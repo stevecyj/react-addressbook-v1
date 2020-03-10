@@ -51,6 +51,50 @@ function ContactForm({ edit, onSave, setContacts, contact, onCancelAdd, onCancel
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
+                            <Form.Group as={Col} controlId="formGridCity">
+                                <Form.Label>電話</Form.Label>
+                                <Form.Control />
+                            </Form.Group>
+
+                            <Form.Group as={Col} controlId="formGridCity">
+                                <Form.Label>電子信箱</Form.Label>
+                                <Form.Control />
+                            </Form.Group>
+
+                            <Form.Group as={Col} controlId="formGridZip">
+                                <Form.Label>性別</Form.Label>
+                                <Form.Control />
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="formGridCity">
+                                <Form.Label>居住城市</Form.Label>
+                                <Form.Control />
+                            </Form.Group>
+
+                            <Form.Group as={Col} controlId="formGridCity">
+                                <Form.Label>鄉鎮市區</Form.Label>
+                                <Form.Control />
+                            </Form.Group>
+
+                            <Form.Group as={Col} controlId="formGridZip">
+                                <Form.Label>郵遞區號</Form.Label>
+                                <Form.Control />
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="exampleForm.ControlInput1">
+                                <Form.Label>詳細地址</Form.Label>
+                                <Form.Control type="email" placeholder="name@example.com" />
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="exampleForm.ControlInput1">
+                                <Form.Label>備註</Form.Label>
+                                <Form.Control type="email" placeholder="name@example.com" />
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
                             <Form.Group as={Col} md="12" controlId="address">
                                 <Form.Label>Address</Form.Label>
                                 <InputGroup>

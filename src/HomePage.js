@@ -50,7 +50,7 @@ function HomePage() {
     });
     return (
         <div className="home-page">
-            <Modal show={openAddModal} onHide={closeModal} variant="dark" dialogClassName="modal_70w custom_modal">
+            <Modal show={openAddModal} onHide={closeModal} variant="dark" dialogClassName="modal_60w custom_modal">
                 <Modal.Header closeButton>
                     <Modal.Title>新增聯絡人</Modal.Title>
                 </Modal.Header>
