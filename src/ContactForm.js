@@ -1,4 +1,5 @@
 import React from 'react';
+import { Formik } from 'formik';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -7,14 +8,24 @@ import { COUNTRIES } from './exports';
 import { addContact, editContact, getContacts } from './requests';
 
 function ContactForm({ edit, onSave, setContacts, contact, onCancelAdd, onCancelEdit }) {
+    const handleSubmit = async evt => {
+        if (!edit) {
+            await addContact(evt);
+        } else {
+            await editContact(evt);
+        }
+        const response = await getContacts();
+        setContacts(response.data);
+        onSave();
+    };
     return (
         <div className="form">
-            <Formik validationSchema={schema} onSubmit={handleSubmit} initialValues={contact || {}}>
+            <Formik onSubmit={handleSubmit} initialValues={contact || {}}>
                 {({ handleSubmit, handleChange, handleBlur, values, touched, isInvalid, errors }) => (
                     <Form noValidate onSubmit={handleSubmit}>
                         <Form.Row>
-                            <Form.Group as={Col} md="12" controlId="firstName">
-                                <Form.Label>First name</Form.Label>
+                            <Form.Group as={Col} controlId="firstName">
+                                <Form.Label>姓名</Form.Label>
                                 <Form.Control
                                     type="text"
                                     name="firstName"
@@ -25,8 +36,9 @@ function ContactForm({ edit, onSave, setContacts, contact, onCancelAdd, onCancel
                                 />
                                 <Form.Control.Feedback type="invalid">{errors.firstName}</Form.Control.Feedback>
                             </Form.Group>
-                            <Form.Group as={Col} md="12" controlId="lastName">
-                                <Form.Label>Last name</Form.Label>
+
+                            <Form.Group as={Col} controlId="lastName">
+                                <Form.Label>英文姓名</Form.Label>
                                 <Form.Control
                                     type="text"
                                     name="lastName"
@@ -37,6 +49,8 @@ function ContactForm({ edit, onSave, setContacts, contact, onCancelAdd, onCancel
                                 />
                                 <Form.Control.Feedback type="invalid">{errors.lastName}</Form.Control.Feedback>
                             </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
                             <Form.Group as={Col} md="12" controlId="address">
                                 <Form.Label>Address</Form.Label>
                                 <InputGroup>

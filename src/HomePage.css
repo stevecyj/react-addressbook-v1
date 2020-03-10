@@ -4,3 +4,15 @@
 .table tbody tr td {
     vertical-align: middle;
 }
+.modal_70w {
+    max-width: 70% !important;
+}
+
+.modal-content {
+    background-color: red;
+}
+
+.custom_modal .modal-content {
+    background-color: #303030;
+    color: #fff;
+}

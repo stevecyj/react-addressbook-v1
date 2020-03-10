@@ -4,9 +4,11 @@ import Table from 'react-bootstrap/Table';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-// import ContactForm from './ContactForm';
+import ContactForm from './ContactForm';
 import './HomePage.css';
+import styles from './custom.module.css';
 import { getContacts, deleteContact } from './requests';
+
 function HomePage() {
     const [openAddModal, setOpenAddModal] = useState(false);
     const [openEditModal, setOpenEditModal] = useState(false);
@@ -48,17 +50,26 @@ function HomePage() {
     });
     return (
         <div className="home-page">
-            <Modal show={openAddModal} onHide={closeModal}>
+            <Modal show={openAddModal} onHide={closeModal} variant="dark" dialogClassName="modal_70w custom_modal">
                 <Modal.Header closeButton>
                     <Modal.Title>新增聯絡人</Modal.Title>
                 </Modal.Header>
-                <Modal.Body></Modal.Body>
+                <Modal.Body>
+                    <ContactForm edit={false} onSave={closeModal.bind(this)} onCancelAdd={cancelAddModal} />
+                </Modal.Body>
             </Modal>
             <Modal show={openEditModal} onHide={closeModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Contact</Modal.Title>
                 </Modal.Header>
-                <Modal.Body></Modal.Body>
+                <Modal.Body>
+                    <ContactForm
+                        edit={true}
+                        onSave={closeModal.bind(this)}
+                        contact={selectedContact}
+                        onCancelEdit={cancelEditModal}
+                    />
+                </Modal.Body>
             </Modal>
             <ButtonToolbar className="justify-content-end mb-2">
                 <Button

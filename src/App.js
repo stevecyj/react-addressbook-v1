@@ -5,6 +5,7 @@ import HomePage from './HomePage';
 import Navbar from 'react-bootstrap/Navbar';
 // import Nav from 'react-bootstrap/Nav';
 import { Container, Button, Row, Col, Table } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import styles from './custom.module.css';
 const history = createHistory();
