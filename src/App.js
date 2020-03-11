@@ -10,9 +10,6 @@ import './App.css';
 import styles from './custom.module.css';
 const history = createHistory();
 function App() {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     return (
         <div className="App">
             <Router history={history}>

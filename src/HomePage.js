@@ -55,7 +55,12 @@ function HomePage() {
                     <Modal.Title>新增聯絡人</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <ContactForm edit={false} onSave={closeModal.bind(this)} onCancelAdd={cancelAddModal} />
+                    <ContactForm
+                        edit={false}
+                        onSave={closeModal.bind(this)}
+                        setContacts={closeModal.bind(this)}
+                        onCancelAdd={cancelAddModal}
+                    />
                 </Modal.Body>
             </Modal>
             <Modal show={openEditModal} onHide={closeModal}>
