@@ -37,7 +37,7 @@ function HomePage() {
     };
     const getData = async () => {
         const response = await getContacts();
-        setContacts(response.data);
+        setContacts(response.data.data);
         setInitialized(true);
     };
     const deleteSelectedContact = async (id) => {
@@ -94,7 +94,7 @@ function HomePage() {
                     </tr>
                 </thead>
                 <tbody>
-                    {contacts.map((c) => (
+                    {contacts.map(c => (
                         <tr key={c.id}>
                             <td>{c.name}</td>
                             <td>{c.phone}</td>

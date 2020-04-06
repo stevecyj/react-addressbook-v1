@@ -18,7 +18,7 @@ function ContactForm({ edit, onSave, setContacts, contact, onCancelAdd, onCancel
         }
         const response = await getContacts();
         // console.log(response);
-        setContacts(response.data);
+        setContacts(response.data.data);
         onSave();
     };
     return (
