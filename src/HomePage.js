@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ContactForm from './ContactForm';
 import './HomePage.css';
+import { connect } from 'react-redux';
 import styles from './custom.module.css';
 import { getContacts, deleteContact } from './requests';
 
@@ -27,7 +28,7 @@ function HomePage() {
     const cancelAddModal = () => {
         setOpenAddModal(false);
     };
-    const editContact = contact => {
+    const editContact = (contact) => {
         setSelectedContact(contact);
         setOpenEditModal(true);
     };
@@ -39,7 +40,7 @@ function HomePage() {
         setContacts(response.data);
         setInitialized(true);
     };
-    const deleteSelectedContact = async id => {
+    const deleteSelectedContact = async (id) => {
         await deleteContact(id);
         getData();
     };
@@ -50,22 +51,18 @@ function HomePage() {
     });
     return (
         <div className="home-page">
+            <h1>連絡資訊</h1>
             <Modal show={openAddModal} onHide={closeModal} variant="dark" dialogClassName="modal_60w custom_modal">
                 <Modal.Header closeButton>
                     <Modal.Title>新增聯絡人</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <ContactForm
-                        edit={false}
-                        onSave={closeModal.bind(this)}
-                        setContacts={closeModal.bind(this)}
-                        onCancelAdd={cancelAddModal}
-                    />
+                    <ContactForm edit={false} onSave={closeModal.bind(this)} onCancelAdd={cancelAddModal} />
                 </Modal.Body>
             </Modal>
             <Modal show={openEditModal} onHide={closeModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Edit Contact</Modal.Title>
+                    <Modal.Title>編輯連絡人</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <ContactForm
@@ -97,7 +94,7 @@ function HomePage() {
                     </tr>
                 </thead>
                 <tbody>
-                    {contacts.map(c => (
+                    {contacts.map((c) => (
                         <tr key={c.id}>
                             <td>{c.name}</td>
                             <td>{c.phone}</td>
@@ -121,4 +118,9 @@ function HomePage() {
     );
 }
 
-export default HomePage;
+const mapStateToProps = (state) => {
+    return {
+        contacts: state.contacts
+    };
+};
+export default connect(mapStateToProps, null)(HomePage);

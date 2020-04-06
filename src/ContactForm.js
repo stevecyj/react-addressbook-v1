@@ -6,17 +6,20 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 // import { COUNTRIES } from './exports';
 import { addContact, editContact, getContacts } from './requests';
+import { connect } from 'react-redux';
+import { setContacts } from './actionCreator';
 
 function ContactForm({ edit, onSave, setContacts, contact, onCancelAdd, onCancelEdit }) {
-    const handleSubmit = async evt => {
+    const handleSubmit = async (evt) => {
         if (!edit) {
             await addContact(evt);
         } else {
             await editContact(evt);
         }
         const response = await getContacts();
-        console.log(setContacts);
+        // console.log(response);
         setContacts(response.data);
+        onSave();
     };
     return (
         <div className="form">
@@ -164,4 +167,12 @@ function ContactForm({ edit, onSave, setContacts, contact, onCancelAdd, onCancel
     );
 }
 
-export default ContactForm;
+const mapStateToProps = (state) => {
+    return {
+        contacts: state.contacts
+    };
+};
+const mapDispatchToProps = (dispatch) => ({
+    setContacts: (contacts) => dispatch(setContacts(contacts))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
