@@ -1,30 +1,45 @@
-import React from 'react';
-import { Formik } from 'formik';
-import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
+import React from 'react'
+import { Formik } from 'formik'
+import Form from 'react-bootstrap/Form'
+import Col from 'react-bootstrap/Col'
 // import InputGroup from 'react-bootstrap/InputGroup';
-import Button from 'react-bootstrap/Button';
+import Button from 'react-bootstrap/Button'
 // import { COUNTRIES } from './exports';
-import { addContact, editContact, getContacts } from './requests';
-import { connect } from 'react-redux';
-import { setContacts } from './actionCreator';
+import { addContact, editContact, getContacts } from './requests'
+import { connect } from 'react-redux'
+import { setContacts } from './actionCreator'
 
-function ContactForm({ edit, onSave, setContacts, contact, onCancelAdd, onCancelEdit }) {
+function ContactForm({
+    edit,
+    onSave,
+    setContacts,
+    contact,
+    onCancelAdd,
+    onCancelEdit,
+}) {
     const handleSubmit = async (evt) => {
         if (!edit) {
-            await addContact(evt);
+            await addContact(evt)
         } else {
-            await editContact(evt);
+            await editContact(evt)
         }
-        const response = await getContacts();
-        // console.log(response);
-        setContacts(response.data.data);
-        onSave();
-    };
+        const response = await getContacts()
+        console.log(response)
+        setContacts(response.data.data)
+        onSave()
+    }
     return (
         <div className="form">
             <Formik onSubmit={handleSubmit} initialValues={contact || {}}>
-                {({ handleSubmit, handleChange, handleBlur, values, touched, isInvalid, errors }) => (
+                {({
+                    handleSubmit,
+                    handleChange,
+                    handleBlur,
+                    values,
+                    touched,
+                    isInvalid,
+                    errors,
+                }) => (
                     <Form noValidate onSubmit={handleSubmit}>
                         <Form.Row>
                             <Form.Group as={Col} controlId="name">
@@ -37,7 +52,9 @@ function ContactForm({ edit, onSave, setContacts, contact, onCancelAdd, onCancel
                                     onChange={handleChange}
                                     isInvalid={touched.name && errors.name}
                                 />
-                                <Form.Control.Feedback type="invalid">{errors.firstName}</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.firstName}
+                                </Form.Control.Feedback>
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="ename">
@@ -48,9 +65,13 @@ function ContactForm({ edit, onSave, setContacts, contact, onCancelAdd, onCancel
                                     placeholder="英文姓名"
                                     value={values.ename || ''}
                                     onChange={handleChange}
-                                    isInvalid={touched.firstName && errors.ename}
+                                    isInvalid={
+                                        touched.firstName && errors.ename
+                                    }
                                 />
-                                <Form.Control.Feedback type="invalid">{errors.ename}</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.ename}
+                                </Form.Control.Feedback>
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
@@ -62,7 +83,9 @@ function ContactForm({ edit, onSave, setContacts, contact, onCancelAdd, onCancel
                                     placeholder="電話"
                                     value={values.phone || ''}
                                     onChange={handleChange}
-                                    isInvalid={touched.firstName && errors.ename}
+                                    isInvalid={
+                                        touched.firstName && errors.ename
+                                    }
                                 />
                             </Form.Group>
 
@@ -86,7 +109,9 @@ function ContactForm({ edit, onSave, setContacts, contact, onCancelAdd, onCancel
                                     placeholder="性別"
                                     value={values.sex || ''}
                                     onChange={handleChange}
-                                    isInvalid={touched.firstName && errors.ename}
+                                    isInvalid={
+                                        touched.firstName && errors.ename
+                                    }
                                 />
                             </Form.Group>
                         </Form.Row>
@@ -99,7 +124,9 @@ function ContactForm({ edit, onSave, setContacts, contact, onCancelAdd, onCancel
                                     placeholder="居住城市"
                                     value={values.city || ''}
                                     onChange={handleChange}
-                                    isInvalid={touched.firstName && errors.ename}
+                                    isInvalid={
+                                        touched.firstName && errors.ename
+                                    }
                                 />
                             </Form.Group>
 
@@ -111,7 +138,9 @@ function ContactForm({ edit, onSave, setContacts, contact, onCancelAdd, onCancel
                                     placeholder="鄉鎮市區"
                                     value={values.township || ''}
                                     onChange={handleChange}
-                                    isInvalid={touched.firstName && errors.ename}
+                                    isInvalid={
+                                        touched.firstName && errors.ename
+                                    }
                                 />
                             </Form.Group>
 
@@ -123,7 +152,9 @@ function ContactForm({ edit, onSave, setContacts, contact, onCancelAdd, onCancel
                                     placeholder="郵遞區號"
                                     value={values.postcode || ''}
                                     onChange={handleChange}
-                                    isInvalid={touched.firstName && errors.ename}
+                                    isInvalid={
+                                        touched.firstName && errors.ename
+                                    }
                                 />
                             </Form.Group>
                         </Form.Row>
@@ -136,7 +167,9 @@ function ContactForm({ edit, onSave, setContacts, contact, onCancelAdd, onCancel
                                     placeholder="詳細地址"
                                     value={values.address || ''}
                                     onChange={handleChange}
-                                    isInvalid={touched.firstName && errors.ename}
+                                    isInvalid={
+                                        touched.firstName && errors.ename
+                                    }
                                 />
                             </Form.Group>
                         </Form.Row>
@@ -149,7 +182,9 @@ function ContactForm({ edit, onSave, setContacts, contact, onCancelAdd, onCancel
                                     placeholder="備註"
                                     value={values.notes || ''}
                                     onChange={handleChange}
-                                    isInvalid={touched.firstName && errors.ename}
+                                    isInvalid={
+                                        touched.firstName && errors.ename
+                                    }
                                 />
                             </Form.Group>
                         </Form.Row>
@@ -157,22 +192,25 @@ function ContactForm({ edit, onSave, setContacts, contact, onCancelAdd, onCancel
                         <Button type="submit" style={{ marginRight: '10px' }}>
                             儲存
                         </Button>
-                        <Button type="button" onClick={edit ? onCancelEdit : onCancelAdd}>
+                        <Button
+                            type="button"
+                            onClick={edit ? onCancelEdit : onCancelAdd}
+                        >
                             取消
                         </Button>
                     </Form>
                 )}
             </Formik>
         </div>
-    );
+    )
 }
 
 const mapStateToProps = (state) => {
     return {
-        contacts: state.contacts
-    };
-};
+        contacts: state.contacts,
+    }
+}
 const mapDispatchToProps = (dispatch) => ({
-    setContacts: (contacts) => dispatch(setContacts(contacts))
-});
-export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
+    setContacts: (contacts) => dispatch(setContacts(contacts)),
+})
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm)

@@ -1,63 +1,73 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import Table from 'react-bootstrap/Table';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import ContactForm from './ContactForm';
-import './HomePage.css';
-import { connect } from 'react-redux';
-import styles from './custom.module.css';
-import { getContacts, deleteContact } from './requests';
+import React from 'react'
+import { useState, useEffect } from 'react'
+import Table from 'react-bootstrap/Table'
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
+import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal'
+import ContactForm from './ContactForm'
+import './HomePage.css'
+
+import { connect } from 'react-redux'
+import styles from './custom.module.css'
+import { getContacts, deleteContact } from './requests'
 
 function HomePage() {
-    const [openAddModal, setOpenAddModal] = useState(false);
-    const [openEditModal, setOpenEditModal] = useState(false);
-    const [initialized, setInitialized] = useState(false);
-    const [selectedId, setSelectedId] = useState(0);
-    const [selectedContact, setSelectedContact] = useState({});
-    const [contacts, setContacts] = useState([]);
+    const [openAddModal, setOpenAddModal] = useState(false)
+    const [openEditModal, setOpenEditModal] = useState(false)
+    const [initialized, setInitialized] = useState(false)
+    const [selectedId, setSelectedId] = useState(0)
+    const [selectedContact, setSelectedContact] = useState({})
+    const [contacts, setContacts] = useState([])
     const openModal = () => {
-        setOpenAddModal(true);
-    };
+        setOpenAddModal(true)
+    }
     const closeModal = () => {
-        setOpenAddModal(false);
-        setOpenEditModal(false);
-        getData();
-    };
+        setOpenAddModal(false)
+        setOpenEditModal(false)
+        getData()
+    }
     const cancelAddModal = () => {
-        setOpenAddModal(false);
-    };
+        setOpenAddModal(false)
+    }
     const editContact = (contact) => {
-        setSelectedContact(contact);
-        setOpenEditModal(true);
-    };
+        setSelectedContact(contact)
+        setOpenEditModal(true)
+    }
     const cancelEditModal = () => {
-        setOpenEditModal(false);
-    };
+        setOpenEditModal(false)
+    }
     const getData = async () => {
-        const response = await getContacts();
-        setContacts(response.data.data);
-        setInitialized(true);
-    };
+        const response = await getContacts()
+        setContacts(response.data.data)
+        setInitialized(true)
+    }
     const deleteSelectedContact = async (id) => {
-        await deleteContact(id);
-        getData();
-    };
+        await deleteContact(id)
+        getData()
+    }
     useEffect(() => {
         if (!initialized) {
-            getData();
+            getData()
         }
-    });
+    })
     return (
         <div className="home-page">
             <h1>連絡資訊</h1>
-            <Modal show={openAddModal} onHide={closeModal} variant="dark" dialogClassName="modal_60w custom_modal">
+            <Modal
+                show={openAddModal}
+                onHide={closeModal}
+                variant="dark"
+                dialogClassName="modal_60w custom_modal"
+            >
                 <Modal.Header closeButton>
                     <Modal.Title>新增聯絡人</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <ContactForm edit={false} onSave={closeModal.bind(this)} onCancelAdd={cancelAddModal} />
+                    <ContactForm
+                        edit={false}
+                        onSave={closeModal.bind(this)}
+                        onCancelAdd={cancelAddModal}
+                    />
                 </Modal.Body>
             </Modal>
             <Modal show={openEditModal} onHide={closeModal}>
@@ -77,7 +87,10 @@ function HomePage() {
                 <Button
                     onClick={openModal}
                     variant="primary"
-                    style={{ backgroundColor: '#2c2c2c', borderColor: '#2c2c2c' }}
+                    style={{
+                        backgroundColor: '#2c2c2c',
+                        borderColor: '#2c2c2c',
+                    }}
                 >
                     新增聯絡人
                 </Button>
@@ -94,19 +107,28 @@ function HomePage() {
                     </tr>
                 </thead>
                 <tbody>
-                    {contacts.map(c => (
+                    {contacts.map((c) => (
                         <tr key={c.id}>
                             <td>{c.name}</td>
                             <td>{c.phone}</td>
                             <td>{c.email}</td>
                             <td>{c.address}</td>
                             <td>
-                                <Button variant="warning" onClick={editContact.bind(this, c)}>
+                                <Button
+                                    variant="warning"
+                                    onClick={editContact.bind(this, c)}
+                                >
                                     編輯
                                 </Button>
                             </td>
                             <td>
-                                <Button variant="danger" onClick={deleteSelectedContact.bind(this, c.id)}>
+                                <Button
+                                    variant="danger"
+                                    onClick={deleteSelectedContact.bind(
+                                        this,
+                                        c.id
+                                    )}
+                                >
                                     刪除
                                 </Button>
                             </td>
@@ -115,12 +137,12 @@ function HomePage() {
                 </tbody>
             </Table>
         </div>
-    );
+    )
 }
 
 const mapStateToProps = (state) => {
     return {
-        contacts: state.contacts
-    };
-};
-export default connect(mapStateToProps, null)(HomePage);
+        contacts: state.contacts,
+    }
+}
+export default connect(mapStateToProps, null)(HomePage)
