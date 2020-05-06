@@ -10,6 +10,40 @@ import './App.css'
 import styles from './custom.module.css'
 const history = createHistory()
 function App() {
+    const data = [
+        {
+            value: 1,
+            label: 'cerulean',
+        },
+        {
+            value: 2,
+            label: 'fuchsia rose',
+        },
+        {
+            value: 3,
+            label: 'true red',
+        },
+        {
+            value: 4,
+            label: 'aqua sky',
+        },
+        {
+            value: 5,
+            label: 'tigerlily',
+        },
+        {
+            value: 6,
+            label: 'blue turquoise',
+        },
+    ]
+
+    // set value for default selection
+    const [selectedValue, setSelectedValue] = useState(3)
+
+    // handle onChange event of the dropdown
+    const handleChange = (e) => {
+        setSelectedValue(e.value)
+    }
     return (
         <div className="App">
             <Router history={history}>

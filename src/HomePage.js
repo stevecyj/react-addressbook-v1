@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import Button from 'react-bootstrap/Button'
+import Dropdown from 'react-bootstrap/Dropdown'
 import Modal from 'react-bootstrap/Modal'
 import ContactForm from './ContactForm'
 import './HomePage.css'
@@ -12,6 +13,7 @@ import styles from './custom.module.css'
 import { getContacts, deleteContact } from './requests'
 
 function HomePage() {
+    const [selectedValue, setSelectedValue] = useState('Action - 3')
     const [openAddModal, setOpenAddModal] = useState(false)
     const [openEditModal, setOpenEditModal] = useState(false)
     const [initialized, setInitialized] = useState(false)
@@ -53,6 +55,21 @@ function HomePage() {
     return (
         <div className="home-page">
             <h1>連絡資訊</h1>
+            <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    Dropdown Button
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                    <Dropdown.Item href="#/action-1">Action-1</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Action-2</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">Action-3</Dropdown.Item>
+                </Dropdown.Menu>
+                <div>
+                    <b>Selected Value: </b>
+                    {selectedValue}
+                </div>
+            </Dropdown>
             <Modal
                 show={openAddModal}
                 onHide={closeModal}
