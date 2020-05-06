@@ -4,10 +4,23 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 // import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button'
+import * as yup from 'yup'
 // import { COUNTRIES } from './exports';
 import { addContact, editContact, getContacts } from './requests'
 import { connect } from 'react-redux'
 import { setContacts } from './actionCreator'
+
+const schema = yup.object({
+    name: yup.string().required('請填寫中文姓名'),
+    ename: yup.string().required('請填寫英文姓名'),
+    phone: yup.string().required('請填寫電話'),
+    email: yup.string().required('請填寫電子信箱'),
+    sex: yup.string().required('請填寫姓別'),
+    city: yup.string().required('請填寫居住城市'),
+    township: yup.string().required('請填寫鄉鎮市區'),
+    postcode: yup.string().required('請填寫郵遞區號'),
+    address: yup.string().required('請填寫詳細地址'),
+})
 
 function ContactForm({
     edit,
@@ -18,6 +31,10 @@ function ContactForm({
     onCancelEdit,
 }) {
     const handleSubmit = async (evt) => {
+        const isValid = await schema.validate(evt)
+        if (!isValid) {
+            return
+        }
         if (!edit) {
             await addContact(evt)
         } else {
@@ -30,13 +47,18 @@ function ContactForm({
     }
     return (
         <div className="form">
-            <Formik onSubmit={handleSubmit} initialValues={contact || {}}>
+            <Formik
+                validationSchema={schema}
+                onSubmit={handleSubmit}
+                initialValues={contact || {}}
+            >
                 {({
                     handleSubmit,
                     handleChange,
                     handleBlur,
                     values,
                     touched,
+                    isValid,
                     isInvalid,
                     errors,
                 }) => (
@@ -50,10 +72,10 @@ function ContactForm({
                                     placeholder="中文姓名"
                                     value={values.name || ''}
                                     onChange={handleChange}
-                                    isInvalid={touched.name && errors.name}
+                                    isInvalid={!!errors.name}
                                 />
                                 <Form.Control.Feedback type="invalid">
-                                    {errors.firstName}
+                                    {errors.name}
                                 </Form.Control.Feedback>
                             </Form.Group>
 
@@ -65,9 +87,7 @@ function ContactForm({
                                     placeholder="英文姓名"
                                     value={values.ename || ''}
                                     onChange={handleChange}
-                                    isInvalid={
-                                        touched.firstName && errors.ename
-                                    }
+                                    isInvalid={!!errors.ename}
                                 />
                                 <Form.Control.Feedback type="invalid">
                                     {errors.ename}
@@ -83,10 +103,11 @@ function ContactForm({
                                     placeholder="電話"
                                     value={values.phone || ''}
                                     onChange={handleChange}
-                                    isInvalid={
-                                        touched.firstName && errors.ename
-                                    }
+                                    isInvalid={!!errors.phone}
                                 />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.phone}
+                                </Form.Control.Feedback>
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="email">
@@ -97,8 +118,11 @@ function ContactForm({
                                     name="email"
                                     value={values.email || ''}
                                     onChange={handleChange}
-                                    isInvalid={touched.email && errors.email}
+                                    isInvalid={!!errors.email}
                                 />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.email}
+                                </Form.Control.Feedback>
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="sex">
@@ -109,10 +133,11 @@ function ContactForm({
                                     placeholder="性別"
                                     value={values.sex || ''}
                                     onChange={handleChange}
-                                    isInvalid={
-                                        touched.firstName && errors.ename
-                                    }
+                                    isInvalid={!!errors.sex}
                                 />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.sex}
+                                </Form.Control.Feedback>
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
@@ -124,10 +149,11 @@ function ContactForm({
                                     placeholder="居住城市"
                                     value={values.city || ''}
                                     onChange={handleChange}
-                                    isInvalid={
-                                        touched.firstName && errors.ename
-                                    }
+                                    isInvalid={!!errors.city}
                                 />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.city}
+                                </Form.Control.Feedback>
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="township">
@@ -138,10 +164,11 @@ function ContactForm({
                                     placeholder="鄉鎮市區"
                                     value={values.township || ''}
                                     onChange={handleChange}
-                                    isInvalid={
-                                        touched.firstName && errors.ename
-                                    }
+                                    isInvalid={!!errors.township}
                                 />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.township}
+                                </Form.Control.Feedback>
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="postCode">
@@ -152,10 +179,11 @@ function ContactForm({
                                     placeholder="郵遞區號"
                                     value={values.postcode || ''}
                                     onChange={handleChange}
-                                    isInvalid={
-                                        touched.firstName && errors.ename
-                                    }
+                                    isInvalid={!!errors.postcode}
                                 />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.postcode}
+                                </Form.Control.Feedback>
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
@@ -167,10 +195,11 @@ function ContactForm({
                                     placeholder="詳細地址"
                                     value={values.address || ''}
                                     onChange={handleChange}
-                                    isInvalid={
-                                        touched.firstName && errors.ename
-                                    }
+                                    isInvalid={!!errors.address}
                                 />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.address}
+                                </Form.Control.Feedback>
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
@@ -182,9 +211,7 @@ function ContactForm({
                                     placeholder="備註"
                                     value={values.notes || ''}
                                     onChange={handleChange}
-                                    isInvalid={
-                                        touched.firstName && errors.ename
-                                    }
+                                    isInvalid={!!errors.notes}
                                 />
                             </Form.Group>
                         </Form.Row>

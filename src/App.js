@@ -1,24 +1,32 @@
-import React, { useState } from 'react';
-import { Router, Route, Link } from 'react-router-dom';
-import { createBrowserHistory as createHistory } from 'history';
-import HomePage from './HomePage';
-import Navbar from 'react-bootstrap/Navbar';
+import React, { useState } from 'react'
+import { Router, Route, Link } from 'react-router-dom'
+import { createBrowserHistory as createHistory } from 'history'
+import HomePage from './HomePage'
+import Navbar from 'react-bootstrap/Navbar'
 // import Nav from 'react-bootstrap/Nav';
-import { Container, Button, Row, Col, Table } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-import styles from './custom.module.css';
-const history = createHistory();
+import { Container, Button, Row, Col, Table } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './App.css'
+import styles from './custom.module.css'
+const history = createHistory()
 function App() {
     return (
         <div className="App">
             <Router history={history}>
                 <Row className="mb-2">
                     <Col>
-                        <Navbar variant="dark" expand="lg" className={styles.customNavBar}>
+                        <Navbar
+                            variant="dark"
+                            expand="lg"
+                            className={styles.customNavBar}
+                        >
                             <Navbar.Brand href="#home">通訊錄</Navbar.Brand>
                             <Navbar.Collapse className="justify-content-end">
-                                <Navbar.Text className={styles.customNavBarText}>React</Navbar.Text>
+                                <Navbar.Text
+                                    className={styles.customNavBarText}
+                                >
+                                    React
+                                </Navbar.Text>
                             </Navbar.Collapse>
                         </Navbar>
                     </Col>
@@ -32,6 +40,6 @@ function App() {
                 </Container>
             </Router>
         </div>
-    );
+    )
 }
-export default App;
+export default App

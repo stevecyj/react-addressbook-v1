@@ -70,7 +70,11 @@ function HomePage() {
                     />
                 </Modal.Body>
             </Modal>
-            <Modal show={openEditModal} onHide={closeModal}>
+            <Modal
+                show={openEditModal}
+                onHide={closeModal}
+                dialogClassName="modal_60w custom_modal"
+            >
                 <Modal.Header closeButton>
                     <Modal.Title>編輯連絡人</Modal.Title>
                 </Modal.Header>
