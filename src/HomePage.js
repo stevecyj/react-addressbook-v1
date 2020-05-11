@@ -12,6 +12,10 @@ import styles from './custom.module.css'
 import { getContacts, deleteContact } from './requests'
 
 function HomePage() {
+<<<<<<< HEAD
+=======
+    const [selectedValue, setSelectedValue] = useState('')
+>>>>>>> 1a6390b... 修改 axios，下拉選單
     const [openAddModal, setOpenAddModal] = useState(false)
     const [openEditModal, setOpenEditModal] = useState(false)
     const [initialized, setInitialized] = useState(false)
@@ -45,6 +49,12 @@ function HomePage() {
         await deleteContact(id)
         getData()
     }
+
+    const handleChange = (eventKey, evt) => {
+        console.log(eventKey, evt)
+        setSelectedValue(eventKey)
+    }
+
     useEffect(() => {
         if (!initialized) {
             getData()
@@ -53,6 +63,42 @@ function HomePage() {
     return (
         <div className="home-page">
             <h1>連絡資訊</h1>
+            <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    Dropdown Button
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                    <Dropdown.Item
+                        eventKey="http://laravelgcp.crud.nctu.me/api"
+                        href="#/action-1"
+                        value="choose1"
+                        onSelect={handleChange}
+                    >
+                        Action-1
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                        eventKey="http://codeignitergcp.crud.nctu.me/api"
+                        href="#/action-2"
+                        value="choose2"
+                        onSelect={handleChange}
+                    >
+                        Action-2
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                        eventKey="http://symfonygcp.crud.nctu.me/api"
+                        href="#/action-3"
+                        value="choose3"
+                        onSelect={handleChange}
+                    >
+                        Action-3
+                    </Dropdown.Item>
+                </Dropdown.Menu>
+                <div>
+                    <b>Selected Value: </b>
+                    {selectedValue}
+                </div>
+            </Dropdown>
             <Modal
                 show={openAddModal}
                 onHide={closeModal}
