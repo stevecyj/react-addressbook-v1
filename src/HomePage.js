@@ -12,10 +12,7 @@ import styles from './custom.module.css'
 import { getContacts, deleteContact } from './requests'
 
 function HomePage() {
-<<<<<<< HEAD
-=======
     const [selectedValue, setSelectedValue] = useState('')
->>>>>>> 1a6390b... 修改 axios，下拉選單
     const [openAddModal, setOpenAddModal] = useState(false)
     const [openEditModal, setOpenEditModal] = useState(false)
     const [initialized, setInitialized] = useState(false)
