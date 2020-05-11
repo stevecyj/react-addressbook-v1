@@ -13,7 +13,7 @@ import styles from './custom.module.css'
 import { getContacts, deleteContact } from './requests'
 
 function HomePage() {
-    const [selectedValue, setSelectedValue] = useState('Action - 3')
+    const [selectedValue, setSelectedValue] = useState('')
     const [openAddModal, setOpenAddModal] = useState(false)
     const [openEditModal, setOpenEditModal] = useState(false)
     const [initialized, setInitialized] = useState(false)
@@ -47,6 +47,12 @@ function HomePage() {
         await deleteContact(id)
         getData()
     }
+
+    const handleChange = (eventKey, evt) => {
+        console.log(eventKey, evt)
+        setSelectedValue(eventKey)
+    }
+
     useEffect(() => {
         if (!initialized) {
             getData()
@@ -61,9 +67,30 @@ function HomePage() {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Action-1</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Action-2</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Action-3</Dropdown.Item>
+                    <Dropdown.Item
+                        eventKey="http://laravelgcp.crud.nctu.me/api"
+                        href="#/action-1"
+                        value="choose1"
+                        onSelect={handleChange}
+                    >
+                        Action-1
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                        eventKey="http://codeignitergcp.crud.nctu.me/api"
+                        href="#/action-2"
+                        value="choose2"
+                        onSelect={handleChange}
+                    >
+                        Action-2
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                        eventKey="http://symfonygcp.crud.nctu.me/api"
+                        href="#/action-3"
+                        value="choose3"
+                        onSelect={handleChange}
+                    >
+                        Action-3
+                    </Dropdown.Item>
                 </Dropdown.Menu>
                 <div>
                     <b>Selected Value: </b>
