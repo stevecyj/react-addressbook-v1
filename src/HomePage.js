@@ -7,13 +7,19 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import Modal from 'react-bootstrap/Modal'
 import ContactForm from './ContactForm'
 import './HomePage.css'
-
+import axios from 'axios'
 import { connect } from 'react-redux'
 import styles from './custom.module.css'
 import { getContacts, deleteContact } from './requests'
 
+const apis = [
+    'http://laravelgcp.crud.nctu.me/api',
+    'http://codeignitergcp.crud.nctu.me/api',
+    'http://symfonygcp.crud.nctu.me/api',
+]
+
 function HomePage() {
-    const [selectedValue, setSelectedValue] = useState('Action - 3')
+    const [selectedValue, setSelectedValue] = useState('')
     const [openAddModal, setOpenAddModal] = useState(false)
     const [openEditModal, setOpenEditModal] = useState(false)
     const [initialized, setInitialized] = useState(false)
@@ -47,29 +53,32 @@ function HomePage() {
         await deleteContact(id)
         getData()
     }
+
     useEffect(() => {
         if (!initialized) {
             getData()
         }
     })
+
+    const [response, setResponse] = useState('')
+    const onChange = async (e) => {
+        const url = e.target.value
+        const data = await axios.get(url)
+        setResponse(JSON.stringify(data, null, 2))
+    }
+
     return (
         <div className="home-page">
             <h1>連絡資訊</h1>
-            <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    Dropdown Button
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Action-1</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Action-2</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Action-3</Dropdown.Item>
-                </Dropdown.Menu>
-                <div>
-                    <b>Selected Value: </b>
-                    {selectedValue}
-                </div>
-            </Dropdown>
+            <select onChange={onChange}>
+                <option key={-1}>Choose API</option>
+                {apis.map((api) => (
+                    <option key={api}>{api}</option>
+                ))}
+            </select>
+            <hr />
+            Response:
+            <pre style={{ textAlign: 'left' }}>{response}</pre>
             <Modal
                 show={openAddModal}
                 onHide={closeModal}
